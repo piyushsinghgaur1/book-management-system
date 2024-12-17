@@ -59,3 +59,7 @@ Deploy the system to a web server or cloud (e.g., AWS).
 Objective: Ensure the system remains functional and updated.
 Example:
 Fix bugs reported by users (e.g., search not returning correct results).
+
+![3 Tier Architecture](<diagrams/3 tier architechture.png>)
+
+![Client server Architecture](<diagrams/client server architecture.png>)
