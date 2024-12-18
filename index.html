@@ -7,7 +7,6 @@
 
     <div class="container">
       <h2>Book Management System</h2>
-
         <form id="formField">
           <div class="form-group">
             <label for="title">Title:</label>
@@ -39,10 +38,29 @@
               <option value="fantasy">Fantasy</option>
             </select>
           </div>
-
+        <center>
+        <div>
           <button type="submit">Submit</button>
-        </form>
-    </div>
+        </div>
+        </center>
+        </form> 
+      
+      <div class="info-table">
+          <table border="1">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Publication Date</th>
+                <th>Genre</th>                
+                <th>E/D</th>
+              </tr>
+            </thead>
+            <tbody id="bookTableBody">
+            </tbody>
+          </table>    
+      </div>
     <script src="assets/js/app.js"></script>
   </body>
 </html>
