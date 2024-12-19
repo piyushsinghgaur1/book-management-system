@@ -4,12 +4,16 @@ Book Management System that allows users to add, edit, delete, and display books
 
 # Folder structure
         book-management-system/
+        ├── assets/
+        │   ├── css/
+        │   │   └── style.css
+        │   ├── js/
+        │   │   └── script.js
         ├── diagram/
-        │   ├── 3 tier architechture
-        │   └── client server architecture
-        ├── README.md
-        ├── index.html
-        └── style.css
+        │   ├── 3-tier-architecture/
+        │   ├── client-server-architecture/
+        │   └── er-diagram/
+        └── readme.md
 
 # Features
 ## Add Books

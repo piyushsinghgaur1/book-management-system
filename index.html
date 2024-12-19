@@ -46,6 +46,15 @@
         </form> 
       
       <div class="info-table">
+        <label for="genreFilter">Categorization by Genre:</label>
+        <select id="genreFilter">
+          <option value="all">All</option>
+          <option value="fiction">Fiction</option>
+          <option value="non-fiction">Non-Fiction</option>
+          <option value="science">Science</option>
+          <option value="biography">Biography</option>
+          <option value="fantasy">Fantasy</option>
+        </select>
           <table border="1">
             <thead>
               <tr>
@@ -53,7 +62,8 @@
                 <th>Author</th>
                 <th>ISBN</th>
                 <th>Publication Date</th>
-                <th>Genre</th>                
+                <th>Genre</th>
+                <th>Age of Book</th>                
                 <th>E/D</th>
               </tr>
             </thead>
