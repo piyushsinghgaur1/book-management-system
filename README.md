@@ -13,12 +13,32 @@ Book Management System that allows users to add, edit, delete, and display books
         │   ├── 3-tier-architecture/
         │   ├── client-server-architecture/
         │   └── er-diagram/
-        └── readme.md
+        └── README.md
 
 # Features
 ## Add Books
 Enter book details such as Title, Author, ISBN, Publication Date, and Genre.
 Validates all input fields.
+
+## Edit and Delete Books.
+Modify existing book details using the Edit button.
+Remove books from the table using the Delete button.
+
+
+## Book Age Calculation
+Calculates and displays the age of the book in X years, Y months, Z days format.
+
+
+## Genre Filter
+Filter books based on their Genre using a dropdown.
+"All" is selected by default to display all books.
+
+
+## Input Validations
+ISBN must be a 13-digit number.
+Publication Date cannot be a future date.
+All fields are mandatory.
+
 
 
 # Technologies Used
