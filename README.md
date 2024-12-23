@@ -2,9 +2,9 @@
 
 Book Management System that allows users to add, edit, delete, and display books. This includes features like age calculation of books, validation checks, and a genre filter.
 
-![BMS screenshot 1](<Screenshot from 2024-12-23 21-23-39.png>)
+![BMS Screenshot 1](<diagrams/BMS ss1.png>)
 
-![BMS Screenshot 2](<Screenshot from 2024-12-23 21-23-58.png>)
+![BMS Screenshot 2](<diagrams/BMS ss2.png>)
 
 # Folder structure
         book-management-system/
