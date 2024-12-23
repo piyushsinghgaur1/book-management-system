@@ -44,14 +44,21 @@ const deleteBook = (isbn) => {
 const displayBooks = () => {
   const tableBody = document.getElementById('bookTableBody');
   const selectedGenre = document.getElementById('genreFilter').value;
+  const searchValue = document.getElementById("searchID").value;
   tableBody.innerHTML = '';
   console.log(selectedGenre);
 
   const filteredBooks = books.filter((book) =>
     selectedGenre === "all" ? true : book.genre.toLowerCase().includes(selectedGenre.toLowerCase())
   );
+
+  const searchBooks = filteredBooks.filter((book) =>
+    book.title.toLowerCase().includes(searchValue.toLowerCase()) || 
+    book.author.toLowerCase().includes(searchValue.toLowerCase()) ||
+    book.isbn.toLowerCase().includes(searchValue.toLowerCase())
+  );
   
-  filteredBooks.forEach((book) => {
+  searchBooks.forEach((book) => {
     const bookAge = calculateBookAge(book.publicationDate)? calculateBookAge(book.publicationDate): "N/A";    
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -68,9 +75,12 @@ const displayBooks = () => {
     `;
     tableBody.appendChild(row);
   });
-  console.log("from app",books);
+  if (searchBooks.length === 0) {
+    tableBody.innerHTML = "<tr><td colspan='7'>No books found</td></tr>";
+  }
 };
 document.getElementById('genreFilter').addEventListener('change', displayBooks);
+document.getElementById('searchBtn').addEventListener('click', displayBooks);
 const form = document.getElementById('formField');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
