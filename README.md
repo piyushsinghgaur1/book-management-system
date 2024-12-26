@@ -2,13 +2,18 @@
 
 Book Management System that allows users to add, edit, delete, and display books. This includes features like age calculation of books, validation checks, and a genre filter.
 
+![BMS Screenshot 1](<diagrams/BMS ss1.png>)
+
+![BMS Screenshot 2](<diagrams/BMS ss2.png>)
+
 # Folder structure
         book-management-system/
         ├── assets/
         │   ├── css/
         │   │   └── style.css
-        │   ├── js/
+        │   ├── js/s
         │   │   └── script.js
+        │   │   └── fetchData.js
         ├── diagram/
         │   ├── 3-tier-architecture/
         │   ├── client-server-architecture/
@@ -39,6 +44,15 @@ ISBN must be a 13-digit number.
 Publication Date cannot be a future date.
 All fields are mandatory.
 
+
+## Fetch Book from External API
+The application fetches book data from an external API and displays it in a table.
+
+## Search & Filtering Functionality
+Users can search for books by title or author or ISBN using a search bar. The search results are displayed dynamically as the user types and categorize according to genre.
+
+## Error Handling
+If a request to fetch the books fails (e.g., due to a network error), the application will perfectly handle the error.
 
 
 # Technologies Used
