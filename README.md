@@ -2,9 +2,9 @@
 
 Book Management System that allows users to add, edit, delete, and display books. This includes features like age calculation of books, validation checks, and a genre filter.
 
-![BMS Screenshot 1](<diagrams/BMS ss1.png>)
+![BMS SS 1](<diagrams/BMS ss01.png>)
 
-![BMS Screenshot 2](<diagrams/BMS ss2.png>)
+![BMS SS 2](<diagrams/BMS ss02.png>)
 
 # Folder structure
         book-management-system/
@@ -14,10 +14,12 @@ Book Management System that allows users to add, edit, delete, and display books
         │   ├── js/s
         │   │   └── script.js
         │   │   └── fetchData.js
+        │   │   └── sortBooks.js        
         ├── diagram/
-        │   ├── 3-tier-architecture/
-        │   ├── client-server-architecture/
-        │   └── er-diagram/
+        │   ├── 3-tier-architecture
+        │   ├── client-server-architecture
+        │   └── BMS ss01
+        │   └── BMS ss02
         └── README.md
 
 # Features
@@ -53,6 +55,12 @@ Users can search for books by title or author or ISBN using a search bar. The se
 
 ## Error Handling
 If a request to fetch the books fails (e.g., due to a network error), the application will perfectly handle the error.
+
+## Talwind Integration
+Style the form and book list using Tailwind CSS.
+
+## Sorting of Books
+Sorting of the books based on the Author.
 
 
 # Technologies Used
