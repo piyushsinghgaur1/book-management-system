@@ -1,4 +1,8 @@
-const sortBooksByAuthor = (order = 'asc') => {
+class SortBooks extends BookManager{
+  constructor(){
+    super();
+  }
+  sortBooksByAuthor(order = 'asc'){
     books.sort((a, b) => {
       const authorA = a.author.toLowerCase();
       const authorB = b.author.toLowerCase();
@@ -13,9 +17,10 @@ const sortBooksByAuthor = (order = 'asc') => {
     if (order === 'desc') {
       books.reverse();
     }
-    displayBooks(); 
-  };
-  
-  document.getElementById('sortAscButton').addEventListener('click', () => sortBooksByAuthor('asc'));
-  document.getElementById('sortDescButton').addEventListener('click', () => sortBooksByAuthor('desc'));
-  
+    this.displayBooks();
+  }
+}
+
+const sortBooks = new SortBooks();
+document.getElementById('sortAscButton').addEventListener('click', () => sortBooks.sortBooksByAuthor('asc'));
+document.getElementById('sortDescButton').addEventListener('click', () => sortBooks.sortBooksByAuthor('desc'));
