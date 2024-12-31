@@ -1,4 +1,4 @@
-books = [];
+books=[];
 class BookManager {
   constructor() {
     this.tableBody = document.getElementById('bookTableBody');
@@ -6,8 +6,8 @@ class BookManager {
     this.searchField = document.getElementById('searchID');
   }
 
-  addBook(title, author, isbn, publicationDate, genre) {
-    const newBook = { title, author, isbn, publicationDate, genre };
+  addBook(title, author, isbn, publicationDate, price, genre) {
+    const newBook = { title, author, isbn, publicationDate, price, genre };
     books.unshift(newBook);
     this.displayBooks();
   }
@@ -15,8 +15,8 @@ class BookManager {
   deleteBook(isbn) {
     books = books.filter(book => book.isbn !== isbn);
     setTimeout(() => {
-      alert('Book deletd successfully!');
-      },500);
+      alert('Book deleted successfully!');
+      },100);
     this.displayBooks();
     
   }
@@ -29,6 +29,7 @@ class BookManager {
       document.getElementById('author').value = book.author;
       document.getElementById('isbn').value = book.isbn;
       document.getElementById('Publication_Date').value = book.publicationDate;
+      document.getElementById('price').value = book.price;
       document.getElementById('genre').value = book.genre;
       books.splice(bookIndex, 1);
       this.displayBooks();
@@ -76,6 +77,7 @@ class BookManager {
         <td>${book.author}</td>
         <td>${book.isbn}</td>
         <td>${book.publicationDate}</td>
+        <td>${book.price}</td>
         <td>${book.genre}</td>
         <td>${bookAge}</td>
         <td>
@@ -105,15 +107,20 @@ form.addEventListener('submit', (event) => {
   const author = document.getElementById('author').value.trim();
   const isbn = document.getElementById('isbn').value.trim();
   const publicationDate = document.getElementById('Publication_Date').value;
+  const price = document.getElementById('price').value;  
   const genre = document.getElementById('genre').value;
 
   let errorMsg = '';
-  if (!title || !author || !isbn || !publicationDate || !genre) {
+  if (!title || !author || !isbn || !publicationDate || !genre || !price) {
     errorMsg += 'All fields are mandatory.\n';
   }
 
   if (isNaN(isbn) || isbn.length !== 13) {
     errorMsg += 'ISBN must be a 13-digit number.\n';
+  }
+
+  if (isNaN(price)) {
+    errorMsg += 'Price must be a number.\n';
   }
 
   const today = new Date().toISOString().split('T')[0];
@@ -128,7 +135,7 @@ form.addEventListener('submit', (event) => {
 
   setTimeout(() => {
     alert('Book added successfully!');
-    },500);
-  bookManager.addBook(title, author, isbn, publicationDate, genre);
+    },100);
+  bookManager.addBook(title, author, isbn, publicationDate, price, genre);
   form.reset();
 });

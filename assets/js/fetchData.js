@@ -3,13 +3,13 @@ class APIBooksManager extends BookManager {
     super();
     this.apiUrl = apiUrl;
   }
-
   fetchBooksFromAPI() {
     fetch(this.apiUrl)
       .then(response => response.json())
       .then(data => {
         const fetchedBooks = data.items.map(item => {
-          const volumeInfo = item.volumeInfo;
+          const volumeInfo = item.volumeInfo;            
+          const saleInfo = item.saleInfo;   
           return {
             title: volumeInfo.title || 'N/A',
             author: volumeInfo.authors ? volumeInfo.authors.join(', ') : 'N/A',
@@ -17,6 +17,9 @@ class APIBooksManager extends BookManager {
               ? volumeInfo.industryIdentifiers[0].identifier
               : `API-${Math.random().toString(36).substr(2, 9)}`,
             publicationDate: volumeInfo.publishedDate || 'N/A',
+            price: saleInfo.saleability === "FOR_SALE" && saleInfo.listPrice
+            ? saleInfo.listPrice.amount || saleInfo.listPrice.amountInMicros
+            : saleInfo.saleability, 
             genre: volumeInfo.categories ? volumeInfo.categories.join(', ') : 'N/A',
             isManual: false,
           };
@@ -31,10 +34,13 @@ class APIBooksManager extends BookManager {
 
         this.displayBooks();
       })
-      .catch(error => console.error('Error fetching books:', error));
+      .catch(error =>{
+        alert('Error fetching books from API. Please check your internet connection.'+error);
+        console.error('Error fetching books:', error)
+      });
   }
 }
 
 // Instantiate APIBooksManager
-const apiBooksManager = new APIBooksManager('https://www.googleapis.com/books/v1/volumes?q=genre:science+fiction+history+fantasy+mystery');
+const apiBooksManager = new APIBooksManager(config.url.baseUrl);
 document.getElementById('fetchButton').addEventListener('click', () => apiBooksManager.fetchBooksFromAPI());

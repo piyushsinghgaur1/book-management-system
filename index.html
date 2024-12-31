@@ -33,6 +33,11 @@
           </div>
 
           <div class="form-group">
+            <label for="price" class="block font-semibold">Price:</label>
+            <input type="text" id="price" placeholder="Enter Price" name="price" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500">
+          </div>
+
+          <div class="form-group">
             <label for="genre" class="block font-semibold">Genre:</label>
             <select id="genre" name="genre" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500">
               <option value="fiction">Fiction</option>
@@ -82,6 +87,7 @@
                 <th class="border border-gray-300 px-4 py-2">Author</th>
                 <th class="border border-gray-300 px-4 py-2">ISBN</th>
                 <th class="border border-gray-300 px-4 py-2">Publication Date</th>
+                <th class="border border-gray-300 px-4 py-2">Price</th>
                 <th class="border border-gray-300 px-4 py-2">Genre</th>
                 <th class="border border-gray-300 px-4 py-2">Age of Book</th>
                 <th class="border border-gray-300 px-4 py-2">E/D</th>
@@ -93,9 +99,9 @@
         </div>
       </div>
     </div>
-
+    <script src="assets/js/config.js"></script>  
     <script src="assets/js/app.js"></script>
     <script src="assets/js/fetchData.js"></script>
-    <script src="assets/js/sortBooks.js"></script>  
+    <script src="assets/js/sortBooks.js"></script> 
   </body>
 </html>
