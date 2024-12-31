@@ -2,69 +2,78 @@
 
 Book Management System that allows users to add, edit, delete, and display books. This includes features like age calculation of books, validation checks, and a genre filter.
 
-![BMS SS 1](<diagrams/BMS ss01.png>)
+![Landscape SS 1](<diagrams/LandScape SS1.png>)
 
-![BMS SS 2](<diagrams/BMS ss02.png>)
+![Landscape SS 2](<diagrams/LandScape SS2.png>)
+
+![Portrait SS 1](<diagrams/Portrait SS1.png>) ![Portrait SS2](<diagrams/Portrait SS2.png>)
 
 # Folder structure
         book-management-system/
         ├── assets/
         │   ├── css/
         │   │   └── style.css
-        │   ├── js/s
-        │   │   └── script.js
+        │   ├── js/
+        │   │   └── app.js
+        │   │   └── config.js
         │   │   └── fetchData.js
         │   │   └── sortBooks.js        
         ├── diagram/
         │   ├── 3-tier-architecture
         │   ├── client-server-architecture
-        │   └── BMS ss01
-        │   └── BMS ss02
+        │   └── Landscape SS1
+        │   └── Landscape SS2
+        │   └── Portrait SS1
+        │   └── Portrait SS2
         └── README.md
 
 # Features
-## Add Books
+
+## 1. Add Books
 Enter book details such as Title, Author, ISBN, Publication Date, and Genre.
 Validates all input fields.
 
-## Edit and Delete Books.
+## 2. Edit and Delete Books.
 Modify existing book details using the Edit button.
 Remove books from the table using the Delete button.
 
 
-## Book Age Calculation
+## 3. Book Age Calculation
 Calculates and displays the age of the book in X years, Y months, Z days format.
 
 
-## Genre Filter
+## 4. Genre Filter
 Filter books based on their Genre using a dropdown.
 "All" is selected by default to display all books.
 
 
-## Input Validations
+## 5. Input Validations
 ISBN must be a 13-digit number.
 Publication Date cannot be a future date.
 All fields are mandatory.
 
 
-## Fetch Book from External API
+## 6. Fetch Book from External API
 The application fetches book data from an external API and displays it in a table.
 
-## Search & Filtering Functionality
+## 7. Search & Filtering Functionality
 Users can search for books by title or author or ISBN using a search bar. The search results are displayed dynamically as the user types and categorize according to genre.
 
-## Error Handling
+## 8. Error Handling
 If a request to fetch the books fails (e.g., due to a network error), the application will perfectly handle the error.
 
-## Talwind Integration
+## 9. Talwind Integration
 Style the form and book list using Tailwind CSS.
 
-## Sorting of Books
+## 10. Sorting of Books
+Sorting of the books based on the Author.
+
+## 11. Add/ Fetch Price of Books
 Sorting of the books based on the Author.
 
 
 # Technologies Used
-HTML || CSS || JAVASCRIPT
+HTML || CSS || JAVASCRIPT || Tailwind CSS
 
 # Setup Instructions
 Clone this repository or download the code files.
@@ -78,7 +87,7 @@ Open the index.html file in your browser.
 1. Requirements Phase
 Objective: Identify the features needed for the system.
 Example:
-Functional: Add, edit, delete books; search books by title/author.
+Functional: Add, edit, delete books; search books by title/author/isbn.
 
 2. Design Phase
 Objective: Plan how the system will be structured and operate.
