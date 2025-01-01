@@ -1,11 +1,16 @@
-class SortBooks extends BookManager{
+class SortBooks extends APIBooksManager{
   constructor(){
     super();
   }
-  sortBooksByAuthor(order = 'asc'){
-    books.sort((a, b) => {
-      const authorA = a.author.toLowerCase();
-      const authorB = b.author.toLowerCase();
+  sortBooks(order = 'asc'){
+      let sortBy= document.getElementById('sortValue').value;
+      if (sortBy==='select'){
+        setTimeout(()=>alert('Please select sort by category'),100);
+        return;
+      }
+      books.sort((a, b) => {    
+      const authorA = a[sortBy].toLowerCase();
+      const authorB = b[sortBy].toLowerCase();
       if (authorA < authorB) {
         return -1;
       } else if (authorA > authorB) {
@@ -13,14 +18,12 @@ class SortBooks extends BookManager{
       } else {
         return 0;
       }
-    });
-    if (order === 'desc') {
-      books.reverse();
-    }
-    this.displayBooks();
+  });
+  if (order === 'desc') {
+    books.reverse();
+  }    
+    this.displayBooks();  
   }
 }
 
 const sortBooks = new SortBooks();
-document.getElementById('sortAscButton').addEventListener('click', () => sortBooks.sortBooksByAuthor('asc'));
-document.getElementById('sortDescButton').addEventListener('click', () => sortBooks.sortBooksByAuthor('desc'));

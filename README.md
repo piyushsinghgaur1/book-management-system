@@ -11,13 +11,14 @@ Book Management System that allows users to add, edit, delete, and display books
 # Folder structure
         book-management-system/
         ├── assets/
-        │   ├── css/
-        │   │   └── style.css
+        │   |
         │   ├── js/
         │   │   └── app.js
         │   │   └── config.js
         │   │   └── fetchData.js
-        │   │   └── sortBooks.js        
+        │   │   └── sortBooks.js
+        │   │   └── events.js
+        │   │   └── tailwind.config.js          
         ├── diagram/
         │   ├── 3-tier-architecture
         │   ├── client-server-architecture

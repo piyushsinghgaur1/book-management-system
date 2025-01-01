@@ -1,4 +1,5 @@
 books=[];
+let errorMsg = '';
 class BookManager {
   constructor() {
     this.tableBody = document.getElementById('bookTableBody');
@@ -10,18 +11,26 @@ class BookManager {
     const newBook = { title, author, isbn, publicationDate, price, genre };
     books.unshift(newBook);
     this.displayBooks();
+    window.scrollTo({
+      top: 600,
+      behavior: 'smooth'
+    });
   }
 
   deleteBook(isbn) {
     books = books.filter(book => book.isbn !== isbn);
-    setTimeout(() => {
-      alert('Book deleted successfully!');
-      },100);
-    this.displayBooks();
-    
+    setTimeout(()=>alert('Book deleted successfully!'),100);
+    this.displayBooks();    
   }
 
   editBook(isbn) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    document.getElementById('isbn').disabled=true;
+    document.getElementById('submit').textContent = 'Update Book';
+    document.getElementById('resetButton').textContent = 'Delete Book';
     const bookIndex = books.findIndex(book => book.isbn === isbn);
     if (bookIndex !== -1) {
       const book = books[bookIndex];
@@ -30,9 +39,12 @@ class BookManager {
       document.getElementById('isbn').value = book.isbn;
       document.getElementById('Publication_Date').value = book.publicationDate;
       document.getElementById('price').value = book.price;
+      const option = document.createElement('option');
+      option.value = book.genre;
+      option.text = book.genre;
+      document.getElementById('genre').appendChild(option);
       document.getElementById('genre').value = book.genre;
       books.splice(bookIndex, 1);
-      this.displayBooks();
     }
   }
 
@@ -64,27 +76,82 @@ class BookManager {
       return matchesGenre && matchesSearch;
     });
   }
+  getData(){
+    this.title = document.getElementById('title').value.trim();
+    this.author = document.getElementById('author').value.trim();
+    this.isbn = document.getElementById('isbn').value.trim();
+    this.publicationDate = document.getElementById('Publication_Date').value;
+    this.price = document.getElementById('price').value;  
+    this.genre = document.getElementById('genre').value;
+  }
+
+  updateBook(){
+    if (errorMsg) {
+      return;
+    }
+    setTimeout(()=>alert('Book Updated successfully!'),100);
+    bookManager.addBook(this.title, this.author, this.isbn, this.publicationDate, this.price, this.genre);
+    form.reset();  
+  }
+
+  addNewBook(){
+    if (errorMsg) {
+      return;
+    }
+    setTimeout(()=>alert('Book Added Successfully!'),100);
+    bookManager.addBook(this.title, this.author, this.isbn, this.publicationDate, this.price, this.genre);
+    form.reset(); 
+  }
+
+  validateBook(){
+    console.log(this.title, this.author, this.isbn, this.publicationDate, this.genre, this.price);
+    if (!this.title || !this.author || !this.isbn || !this.publicationDate || !this.genre || !this.price) {
+      errorMsg += 'All fields are mandatory.\n';
+    }
+
+    if (isNaN(this.isbn)  && document.getElementById('submit').textContent === 'Add Book') {
+      errorMsg += 'ISBN must be a 13-digit number.\n';
+    }
+
+    if (isNaN(this.price) && document.getElementById('submit').textContent === 'Add Book') {
+      errorMsg += 'Price must be a number.\n';
+    }
+
+    const today = new Date().toISOString().split('T')[0];
+    if (this.publicationDate > today) {
+      errorMsg += 'Publication Date cannot be in the future.\n';
+    }
+
+    if (errorMsg) {
+      alert(errorMsg);
+      return;
+    }
+  }
 
   displayBooks() {
     const filteredBooks = this.filterBooks();
     this.tableBody.innerHTML = '';
+    document.getElementById('submit').textContent = 'Add Book';
+    document.getElementById('resetButton').textContent = 'Reset';
+    document.getElementById('isbn').disabled=false;  
 
     filteredBooks.forEach(book => {
       const bookAge = book.publicationDate ? this.calculateBookAge(book.publicationDate) : 'N/A';
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td>${book.title}</td>
-        <td>${book.author}</td>
-        <td>${book.isbn}</td>
-        <td>${book.publicationDate}</td>
-        <td>${book.price}</td>
-        <td>${book.genre}</td>
-        <td>${bookAge}</td>
-        <td>
-          <button class="edit-btn" onclick="bookManager.editBook('${book.isbn}')">Edit</button>
-          <button class="delete-btn" onclick="bookManager.deleteBook('${book.isbn}')">Delete</button>
-        </td>
-      `;
+        <td class="border border-gray-500 px-4 py-2">${book.title}</td>
+        <td class="border border-gray-500 px-4 py-2">${book.author}</td>
+        <td class="border border-gray-500 px-4 py-2">${book.isbn}</td>
+        <td class="border border-gray-500 px-4 py-2">${book.publicationDate}</td>
+        <td class="border border-gray-500 px-4 py-2">${book.price}</td>
+        <td class="border border-gray-500 px-4 py-2">${book.genre}</td>
+        <td class="border border-gray-500 px-4 py-2">${bookAge}</td>
+        <td class="border border-gray-500 px-4 py-2">
+        <div class="flex space-x-2">
+          <button class="edit-btn bg-blue-500 text-white px-1 py-1 rounded-md hover:bg-blue-700" onclick="bookManager.editBook('${book.isbn}')">Edit</button>
+          <button class="delete-btn bg-red-500 text-white px-1 py-1 rounded-md hover:bg-red-700" onclick="bookManager.deleteBook('${book.isbn}')">Delete</button>
+        </div>
+          </td>  `;
       this.tableBody.appendChild(row);
     });
 
@@ -94,48 +161,6 @@ class BookManager {
   }
 }
 
-// Instantiate the BookManager
 const bookManager = new BookManager();
-
-document.getElementById('genreFilter').addEventListener('change', () => bookManager.displayBooks());
-document.getElementById('searchBtn').addEventListener('click', () => bookManager.displayBooks());
-
 const form = document.getElementById('formField');
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const title = document.getElementById('title').value.trim();
-  const author = document.getElementById('author').value.trim();
-  const isbn = document.getElementById('isbn').value.trim();
-  const publicationDate = document.getElementById('Publication_Date').value;
-  const price = document.getElementById('price').value;  
-  const genre = document.getElementById('genre').value;
 
-  let errorMsg = '';
-  if (!title || !author || !isbn || !publicationDate || !genre || !price) {
-    errorMsg += 'All fields are mandatory.\n';
-  }
-
-  if (isNaN(isbn) || isbn.length !== 13) {
-    errorMsg += 'ISBN must be a 13-digit number.\n';
-  }
-
-  if (isNaN(price)) {
-    errorMsg += 'Price must be a number.\n';
-  }
-
-  const today = new Date().toISOString().split('T')[0];
-  if (publicationDate > today) {
-    errorMsg += 'Publication Date cannot be in the future.\n';
-  }
-
-  if (errorMsg) {
-    alert(errorMsg);
-    return;
-  }
-
-  setTimeout(() => {
-    alert('Book added successfully!');
-    },100);
-  bookManager.addBook(title, author, isbn, publicationDate, price, genre);
-  form.reset();
-});
