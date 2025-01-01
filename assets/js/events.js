@@ -7,7 +7,6 @@ form.addEventListener('submit', (event) => {
     else
         bookManager.updateBook();
 });
-
 document.getElementById('genreFilter').addEventListener('change', () => bookManager.displayBooks());
 document.getElementById('searchID').addEventListener('input', () => bookManager.displayBooks());
 document.getElementById('searchBtn').addEventListener('click', () => bookManager.displayBooks());

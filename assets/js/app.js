@@ -20,6 +20,9 @@ class BookManager {
   deleteBook(isbn) {
     books = books.filter(book => book.isbn !== isbn);
     setTimeout(()=>alert('Book deleted successfully!'),100);
+    document.getElementById('submit').textContent = 'Add Book';
+    document.getElementById('resetButton').textContent = 'Reset';
+    document.getElementById('isbn').disabled=false;  
     this.displayBooks();    
   }
 
@@ -91,7 +94,10 @@ class BookManager {
     }
     setTimeout(()=>alert('Book Updated successfully!'),100);
     bookManager.addBook(this.title, this.author, this.isbn, this.publicationDate, this.price, this.genre);
-    form.reset();  
+    form.reset();    
+    document.getElementById('submit').textContent = 'Add Book';
+    document.getElementById('resetButton').textContent = 'Reset';
+    document.getElementById('isbn').disabled=false;    
   }
 
   addNewBook(){
@@ -131,10 +137,6 @@ class BookManager {
   displayBooks() {
     const filteredBooks = this.filterBooks();
     this.tableBody.innerHTML = '';
-    document.getElementById('submit').textContent = 'Add Book';
-    document.getElementById('resetButton').textContent = 'Reset';
-    document.getElementById('isbn').disabled=false;  
-
     filteredBooks.forEach(book => {
       const bookAge = book.publicationDate ? this.calculateBookAge(book.publicationDate) : 'N/A';
       const row = document.createElement('tr');
