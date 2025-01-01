@@ -12,7 +12,7 @@ document.getElementById('searchID').addEventListener('input', () => bookManager.
 document.getElementById('searchBtn').addEventListener('click', () => bookManager.displayBooks());
 document.getElementById('resetButton').addEventListener('click', () => {
     if( document.getElementById('resetButton').textContent === 'Delete Book')
-        bookManager.deleteBook(this.isbn);
+        bookManager.deleteBook(currentIsbn);
     else
         alert('Form Cleared successfully!');
 });

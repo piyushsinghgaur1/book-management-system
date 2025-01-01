@@ -1,5 +1,7 @@
 books=[];
 let errorMsg = '';
+let bookIndex=-1;
+let currentIsbn=0
 class BookManager {
   constructor() {
     this.tableBody = document.getElementById('bookTableBody');
@@ -18,14 +20,14 @@ class BookManager {
   }
 
   deleteBook(isbn) {
-    books = books.filter(book => book.isbn !== isbn);
+    bookIndex = books.findIndex(book => book.isbn === isbn);
+    books.splice(bookIndex, 1);    
     setTimeout(()=>alert('Book deleted successfully!'),100);
     document.getElementById('submit').textContent = 'Add Book';
     document.getElementById('resetButton').textContent = 'Reset';
     document.getElementById('isbn').disabled=false;  
     this.displayBooks();    
   }
-
   editBook(isbn) {
     window.scrollTo({
       top: 0,
@@ -34,7 +36,8 @@ class BookManager {
     document.getElementById('isbn').disabled=true;
     document.getElementById('submit').textContent = 'Update Book';
     document.getElementById('resetButton').textContent = 'Delete Book';
-    const bookIndex = books.findIndex(book => book.isbn === isbn);
+    bookIndex = books.findIndex(book => book.isbn === isbn);
+    currentIsbn =isbn;
     if (bookIndex !== -1) {
       const book = books[bookIndex];
       document.getElementById('title').value = book.title;
@@ -47,7 +50,6 @@ class BookManager {
       option.text = book.genre;
       document.getElementById('genre').appendChild(option);
       document.getElementById('genre').value = book.genre;
-      books.splice(bookIndex, 1);
     }
   }
 
@@ -90,8 +92,10 @@ class BookManager {
 
   updateBook(){
     if (errorMsg) {
+      errorMsg ='';
       return;
     }
+    books.splice(bookIndex, 1);
     setTimeout(()=>alert('Book Updated successfully!'),100);
     bookManager.addBook(this.title, this.author, this.isbn, this.publicationDate, this.price, this.genre);
     form.reset();    
@@ -102,6 +106,7 @@ class BookManager {
 
   addNewBook(){
     if (errorMsg) {
+      errorMsg ='';
       return;
     }
     setTimeout(()=>alert('Book Added Successfully!'),100);
@@ -127,7 +132,6 @@ class BookManager {
     if (this.publicationDate > today) {
       errorMsg += 'Publication Date cannot be in the future.\n';
     }
-
     if (errorMsg) {
       alert(errorMsg);
       return;
@@ -162,7 +166,6 @@ class BookManager {
     }
   }
 }
-
 const bookManager = new BookManager();
 const form = document.getElementById('formField');
 
